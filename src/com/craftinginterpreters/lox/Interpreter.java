@@ -3,21 +3,9 @@ package com.craftinginterpreters.lox;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.craftinginterpreters.lox.Expr.Assign;
-import com.craftinginterpreters.lox.Expr.Binary;
-import com.craftinginterpreters.lox.Expr.Call;
-import com.craftinginterpreters.lox.Expr.Grouping;
-import com.craftinginterpreters.lox.Expr.Literal;
-import com.craftinginterpreters.lox.Expr.Logical;
-import com.craftinginterpreters.lox.Expr.Unary;
-import com.craftinginterpreters.lox.Expr.Variable;
-import com.craftinginterpreters.lox.Stmt.Block;
-import com.craftinginterpreters.lox.Stmt.Expression;
-import com.craftinginterpreters.lox.Stmt.Function;
-import com.craftinginterpreters.lox.Stmt.If;
-import com.craftinginterpreters.lox.Stmt.Print;
-import com.craftinginterpreters.lox.Stmt.Var;
-import com.craftinginterpreters.lox.Stmt.While;
+import com.craftinginterpreters.lox.Expr.*;
+import com.craftinginterpreters.lox.Stmt.*;
+
 
 public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     final Environment globals = new Environment();
@@ -285,5 +273,13 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
         LoxFunction function = new LoxFunction(stmt);
         environment.define(stmt.name.lexeme, function);
         return null;
+    }
+
+    @Override
+    public Void visitReturnStmt(Return stmt) {
+        Object value = null;
+        if (stmt.value != null) value = evaluate(stmt.value);
+
+        throw new ReturnValue(value);
     }    
 }
