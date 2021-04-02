@@ -1,6 +1,8 @@
 MIT License
 
-Copyright (c) 2021 ftijan
+Original source license: https://github.com/munificent/craftinginterpreters/blob/master/LICENSE
+Based on the source by (c) 2015 Robert Nystrom
+Other changes (c) 2021 ftijan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
