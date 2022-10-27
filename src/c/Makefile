@@ -1,4 +1,4 @@
-DEPS := 
+DEPS := chunk.c memory.c
 
 main: main.c
 	gcc -std=c99 -Wall main.c $(DEPS) -o main
