@@ -206,7 +206,20 @@ ParseRule rules[] = {
 };
 
 static void parsePrecedence(Precedence precedence) {
-    // TODO:
+    advance();
+    ParseFn prefixRule = getRule(parser.previous.type)->prefix;
+    if (prefixRule == NULL) {
+        error("Expect expression.");
+        return;
+    }
+
+    prefixRule();
+
+    while (precedence <= getRule(parser.current.type)->precedence) {
+        advance();
+        ParseFn infixRule = getRule(parser.previous.type)->infix;
+        infixRule();
+    }
 }
 
 static ParseRule* getRule(TokenType type) {
