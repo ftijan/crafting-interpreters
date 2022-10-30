@@ -1,4 +1,4 @@
-DEPS := value.c scanner.c compiler.c memory.c chunk.c vm.c debug.c
+DEPS := scanner.c compiler.c memory.c object.c value.c table.c chunk.c vm.c debug.c
 
 main: main.c
 	gcc -std=c99 -Wall main.c $(DEPS) -o main
