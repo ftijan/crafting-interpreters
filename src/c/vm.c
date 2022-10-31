@@ -63,7 +63,8 @@ void initVM() {
     initTable(&vm.globals);
     initTable(&vm.strings);
 
-    defineNative("clock", clockNative);
+    // workaround for GC init crash
+    //defineNative("clock", clockNative);
 }
 
 void freeVM() {
