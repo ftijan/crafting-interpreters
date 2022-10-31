@@ -64,9 +64,8 @@ void initVM() {
 
     initTable(&vm.globals);
     initTable(&vm.strings);
-
-    // workaround for GC init crash
-    //defineNative("clock", clockNative);
+    
+    defineNative("clock", clockNative);
 }
 
 void freeVM() {
@@ -165,8 +164,8 @@ static bool isFalsey(Value value) {
 }
 
 static void concatenate() {
-    ObjString* b = AS_STRING(pop());
-    ObjString* a = AS_STRING(pop());
+    ObjString* b = AS_STRING(peek(0));
+    ObjString* a = AS_STRING(peek(1));
 
     int length = a->length + b->length;
     char* chars = ALLOCATE(char, length + 1);
@@ -175,6 +174,8 @@ static void concatenate() {
     chars[length] = '\0';
 
     ObjString* result = takeString(chars, length);
+    pop();
+    pop();
     push(OBJ_VAL(result));
 }
 
