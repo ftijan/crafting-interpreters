@@ -58,6 +58,8 @@ static void runFile(const char* path) {
 }
 
 int main (int argc, const char* argv[]) {
+    // GDB breakpoint triggerable by the debugger.
+    //__debugbreak();
     initVM();
 
     if (argc == 1) {
